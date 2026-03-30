@@ -1,195 +1,120 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BRAZ Gráfica | Etiquetas</title>
+export default function BrazGraficaStore() { const products = [ { name: 'Etiquetas 3 cm', description: 'Ideal para pequeños envases y packaging.', price: 450, image: 'https://images.unsplash.com/photo-1586075010923-2dd4570fb338?q=80&w=1200&auto=format&fit=crop' }, { name: 'Etiquetas 5 cm', description: 'Perfectas para frascos, botellas y productos premium.', price: 450, image: 'https://images.unsplash.com/photo-1586880244406-556ebe35f282?q=80&w=1200&auto=format&fit=crop' }, { name: 'Etiquetas Personalizadas', description: 'Diseño exclusivo para tu marca y negocio.', price: 'Consultar', image: 'https://images.unsplash.com/photo-1556740749-887f6717d7e4?q=80&w=1200&auto=format&fit=crop' } ];
 
-<style>
-body {
-  margin:0;
-  font-family: Arial;
-  background:#0f172a;
-  color:white;
-}
+const sendWhatsApp = (product) => { const text = Hola, quiero consultar por ${product}; window.open(https://wa.me/5555991140736?text=${encodeURIComponent(text)}, '_blank'); };
 
-header {
-  background:#020617;
-  padding:15px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
+return ( <div className="min-h-screen bg-slate-950 text-white"> <header className="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-50"> <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center"> <div> <h1 className="text-2xl font-bold text-yellow-400">BRAZ</h1> <p className="text-sm text-slate-400">Etiquetas y Gráfica Profesional</p> </div>
 
-h1 { color:#facc15; }
+<a
+        href="https://wa.me/5555991140736"
+        target="_blank"
+        className="bg-green-500 hover:bg-green-600 transition px-5 py-3 rounded-2xl font-semibold shadow-lg"
+      >
+        WhatsApp
+      </a>
+    </div>
+  </header>
 
-.container {
-  padding:20px;
-}
+  <section className="max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-10 items-center">
+    <div>
+      <span className="bg-yellow-400 text-slate-900 px-4 py-2 rounded-full text-sm font-bold">
+        Producción rápida
+      </span>
 
-.grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:20px;
-}
+      <h2 className="text-5xl font-bold mt-6 leading-tight">
+        Etiquetas adhesivas para hacer crecer tu marca
+      </h2>
 
-.card {
-  background:#1e293b;
-  border-radius:12px;
-  padding:15px;
-}
+      <p className="text-slate-400 text-lg mt-6">
+        Diseños personalizados, impresión de alta calidad y atención rápida para emprendedores, tiendas y empresas.
+      </p>
 
-button {
-  background:#22c55e;
-  border:none;
-  padding:10px;
-  width:100%;
-  border-radius:8px;
-  color:white;
-  cursor:pointer;
-  font-weight:bold;
-}
+      <div className="flex gap-4 mt-8 flex-wrap">
+        <a
+          href="https://wa.me/5555991140736"
+          target="_blank"
+          className="bg-green-500 hover:bg-green-600 transition px-6 py-4 rounded-2xl font-bold"
+        >
+          Pedir ahora
+        </a>
 
-input, select {
-  width:100%;
-  padding:8px;
-  margin:5px 0;
-  border-radius:6px;
-  border:none;
-}
+        <a
+          href="#productos"
+          className="border border-slate-700 hover:border-yellow-400 transition px-6 py-4 rounded-2xl font-bold"
+        >
+          Ver catálogo
+        </a>
+      </div>
+    </div>
 
-#carrito {
-  position:fixed;
-  right:0;
-  top:0;
-  width:300px;
-  height:100%;
-  background:#020617;
-  padding:15px;
-  overflow:auto;
-}
+    <div>
+      <img
+        src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1400&auto=format&fit=crop"
+        alt="Etiquetas"
+        className="rounded-3xl shadow-2xl w-full h-[500px] object-cover"
+      />
+    </div>
+  </section>
 
-footer {
-  text-align:center;
-  padding:20px;
-  color:#64748b;
-}
-</style>
-</head>
+  <section id="productos" className="max-w-7xl mx-auto px-6 py-16">
+    <div className="text-center mb-12">
+      <h3 className="text-4xl font-bold">Nuestros productos</h3>
+      <p className="text-slate-400 mt-4">Soluciones de etiquetas para cualquier tipo de negocio.</p>
+    </div>
 
-<body>
+    <div className="grid md:grid-cols-3 gap-8">
+      {products.map((product, index) => (
+        <div
+          key={index}
+          className="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden hover:scale-105 transition duration-300 shadow-xl"
+        >
+          <img
+            src={product.image}
+            alt={product.name}
+            className="w-full h-64 object-cover"
+          />
 
-<header>
-  <h1>BRAZ</h1>
-  <button onclick="enviarPedido()">Finalizar pedido</button>
-</header>
+          <div className="p-6">
+            <h4 className="text-2xl font-bold">{product.name}</h4>
+            <p className="text-slate-400 mt-3">{product.description}</p>
 
-<div class="container">
+            <div className="mt-6 flex justify-between items-center">
+              <span className="text-yellow-400 text-2xl font-bold">
+                {typeof product.price === 'number' ? `$${product.price}` : product.price}
+              </span>
 
-<h2>Calculadora de Etiquetas</h2>
+              <button
+                onClick={() => sendWhatsApp(product.name)}
+                className="bg-green-500 hover:bg-green-600 transition px-5 py-3 rounded-2xl font-bold"
+              >
+                Pedir
+              </button>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
 
-<div class="card">
-  <label>Tamaño</label>
-  <select id="tam">
-    <option value="2">2 cm</option>
-    <option value="3">3 cm</option>
-    <option value="4">4 cm</option>
-    <option value="5">5 cm</option>
-    <option value="8">8 cm</option>
-    <option value="10">10 cm</option>
-  </select>
+  <section className="max-w-7xl mx-auto px-6 py-16">
+    <div className="bg-gradient-to-r from-yellow-400 to-orange-500 rounded-3xl p-10 text-slate-900 text-center shadow-2xl">
+      <h3 className="text-4xl font-bold">¿Listo para vender más?</h3>
+      <p className="mt-4 text-lg font-medium">
+        Recibí tu presupuesto en minutos por WhatsApp.
+      </p>
 
-  <label>Cantidad deseada</label>
-  <input type="number" id="cantidad" placeholder="Ej: 500">
+      <a
+        href="https://wa.me/5555991140736"
+        target="_blank"
+        className="inline-block mt-8 bg-slate-900 text-white px-8 py-4 rounded-2xl font-bold hover:scale-105 transition"
+      >
+        Solicitar presupuesto
+      </a>
+    </div>
+  </section>
 
-  <button onclick="calcular()">Calcular</button>
-
-  <p id="resultado"></p>
+  <footer className="border-t border-slate-800 py-8 text-center text-slate-500">
+    © 2026 BRAZ Gráfica - Etiquetas adhesivas profesionales
+  </footer>
 </div>
 
-<h2>Productos</h2>
-
-<div class="grid" id="productos"></div>
-
-</div>
-
-<div id="carrito">
-  <h3>Carrito</h3>
-  <ul id="lista"></ul>
-</div>
-
-<footer>
-© 2026 BRAZ Gráfica
-</footer>
-
-<script>
-
-const productos = [
-  {nombre:"Etiquetas 5cm", precio:450},
-  {nombre:"Etiquetas 3cm", precio:450},
-  {nombre:"Etiquetas 8cm", precio:450}
-];
-
-let carrito = [];
-
-function renderProductos(){
-  let html="";
-  productos.forEach((p,i)=>{
-    html+=`
-    <div class="card">
-      <h3>${p.nombre}</h3>
-      <p>$${p.precio}</p>
-      <button onclick="agregar(${i})">Agregar</button>
-    </div>`;
-  });
-  document.getElementById("productos").innerHTML=html;
-}
-
-function agregar(i){
-  carrito.push(productos[i]);
-  renderCarrito();
-}
-
-function renderCarrito(){
-  let html="";
-  carrito.forEach(p=>{
-    html+=`<li>${p.nombre} - $${p.precio}</li>`;
-  });
-  document.getElementById("lista").innerHTML=html;
-}
-
-function enviarPedido(){
-  let texto="Hola, quiero pedir:%0A";
-  carrito.forEach(p=>{
-    texto+=`- ${p.nombre} ($${p.precio})%0A`;
-  });
-
-  window.open(`https://wa.me/5555991140736?text=${texto}`);
-}
-
-function calcular(){
-  let tam = document.getElementById("tam").value;
-  let cantidad = document.getElementById("cantidad").value;
-
-  let base = {
-    2:2500,
-    3:1089,
-    4:625,
-    5:400,
-    8:144,
-    10:100
-  };
-
-  let packs = Math.ceil(cantidad / base[tam]);
-  let total = packs * 450;
-
-  document.getElementById("resultado").innerHTML =
-    `Necesitas ${packs} packs → Total: $${total}`;
-}
-
-renderProductos();
-
-</script>
-
-</body>
-</html>
+); }
