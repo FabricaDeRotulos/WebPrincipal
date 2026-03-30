@@ -1,98 +1,78 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Etiquetas Adesivas Personalizadas</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BRAZ Gráfica | Etiquetas</title>
 
 <style>
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    background: #f4f4f4;
+  margin:0;
+  font-family: Arial;
+  background:#0f172a;
+  color:white;
 }
 
 header {
-    background: #111;
-    padding: 20px;
-    text-align: center;
+  background:#020617;
+  padding:15px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
 
-header img {
-    max-width: 200px;
-    margin-bottom: 15px;
-}
-
-.banner img {
-    width: 100%;
-    max-width: 1200px;
-    border-radius: 10px;
-}
+h1 { color:#facc15; }
 
 .container {
-    max-width: 1200px;
-    margin: auto;
-    padding: 20px;
+  padding:20px;
 }
 
-.produtos {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
+.grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
 }
 
-.produto {
-    background: #fff;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    text-align: center;
+.card {
+  background:#1e293b;
+  border-radius:12px;
+  padding:15px;
 }
 
-.produto img {
-    width: 100%;
-    max-width: 250px;
-    margin-bottom: 10px;
+button {
+  background:#22c55e;
+  border:none;
+  padding:10px;
+  width:100%;
+  border-radius:8px;
+  color:white;
+  cursor:pointer;
+  font-weight:bold;
 }
 
-select, button {
-    width: 100%;
-    padding: 8px;
-    margin-top: 8px;
+input, select {
+  width:100%;
+  padding:8px;
+  margin:5px 0;
+  border-radius:6px;
+  border:none;
 }
 
-.preco {
-    font-size: 20px;
-    font-weight: bold;
-    margin-top: 10px;
+#carrito {
+  position:fixed;
+  right:0;
+  top:0;
+  width:300px;
+  height:100%;
+  background:#020617;
+  padding:15px;
+  overflow:auto;
 }
 
-.carrinho {
-    background: #fff;
-    margin-top: 30px;
-    padding: 20px;
-    border-radius: 10px;
-    border: 2px solid #25d366;
-}
-
-.item-carrinho {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 8px;
-}
-
-.remover {
-    cursor: pointer;
-    color: red;
-}
-
-.whatsapp {
-    background: #25d366;
-    color: #fff;
-    border: none;
-    padding: 12px;
-    font-size: 18px;
-    margin-top: 15px;
-    cursor: pointer;
+footer {
+  text-align:center;
+  padding:20px;
+  color:#64748b;
 }
 </style>
 </head>
@@ -100,149 +80,115 @@ select, button {
 <body>
 
 <header>
-    <img src="img/logo.png" alt="Logo da Empresa">
-    <div class="banner">
-        <img src="img/banner.jpg" alt="Banner">
-    </div>
+  <h1>BRAZ</h1>
+  <button onclick="enviarPedido()">Finalizar pedido</button>
 </header>
 
 <div class="container">
 
-<h2>Etiquetas Adesivas Personalizadas</h2>
-<p><strong>Preço a partir de R$ 30,00</strong></p>
+<h2>Calculadora de Etiquetas</h2>
 
-<div class="produtos">
+<div class="card">
+  <label>Tamaño</label>
+  <select id="tam">
+    <option value="2">2 cm</option>
+    <option value="3">3 cm</option>
+    <option value="4">4 cm</option>
+    <option value="5">5 cm</option>
+    <option value="8">8 cm</option>
+    <option value="10">10 cm</option>
+  </select>
 
-<!-- PRODUTO 1 -->
-<div class="produto">
-    <img src="img/redonda.jpg">
-    <h3>Etiqueta Redonda</h3>
+  <label>Cantidad deseada</label>
+  <input type="number" id="cantidad" placeholder="Ej: 500">
 
-    <select class="tamanho" onchange="atualizarPreco(this)">
-        <option data-area="0.000707">3 cm</option>
-        <option data-area="0.001963">5 cm</option>
-        <option data-area="0.003848">7 cm</option>
-        <option data-area="0.007854">10 cm</option>
-    </select>
+  <button onclick="calcular()">Calcular</button>
 
-    <select class="quantidade" onchange="atualizarPreco(this)">
-        <option value="100">100 unidades</option>
-        <option value="300">300 unidades</option>
-        <option value="500">500 unidades</option>
-        <option value="1000">1000 unidades</option>
-    </select>
-
-    <div class="preco">R$ 30,00</div>
-    <button onclick="adicionarCarrinho(this,'Etiqueta Redonda')">Adicionar ao carrinho</button>
+  <p id="resultado"></p>
 </div>
 
-<!-- PRODUTO 2 -->
-<div class="produto">
-    <img src="img/quadrada.jpg">
-    <h3>Etiqueta Quadrada</h3>
+<h2>Productos</h2>
 
-    <select class="tamanho" onchange="atualizarPreco(this)">
-        <option data-area="0.0009">3x3 cm</option>
-        <option data-area="0.0025">5x5 cm</option>
-        <option data-area="0.0049">7x7 cm</option>
-        <option data-area="0.01">10x10 cm</option>
-    </select>
-
-    <select class="quantidade" onchange="atualizarPreco(this)">
-        <option value="100">100 unidades</option>
-        <option value="300">300 unidades</option>
-        <option value="500">500 unidades</option>
-        <option value="1000">1000 unidades</option>
-    </select>
-
-    <div class="preco">R$ 30,00</div>
-    <button onclick="adicionarCarrinho(this,'Etiqueta Quadrada')">Adicionar ao carrinho</button>
-</div>
-
-<!-- PRODUTO 3 -->
-<div class="produto">
-    <img src="img/lacre.jpg">
-    <h3>Lacre Adesivo</h3>
-
-    <select class="tamanho" onchange="atualizarPreco(this)">
-        <option data-area="0.001">Pequeno</option>
-        <option data-area="0.002">Médio</option>
-        <option data-area="0.0035">Grande</option>
-    </select>
-
-    <select class="quantidade" onchange="atualizarPreco(this)">
-        <option value="100">100 unidades</option>
-        <option value="300">300 unidades</option>
-        <option value="500">500 unidades</option>
-        <option value="1000">1000 unidades</option>
-    </select>
-
-    <div class="preco">R$ 30,00</div>
-    <button onclick="adicionarCarrinho(this,'Lacre Adesivo')">Adicionar ao carrinho</button>
-</div>
+<div class="grid" id="productos"></div>
 
 </div>
 
-<!-- CARRINHO -->
-<div class="carrinho">
-    <h3>Carrinho</h3>
-    <div id="itens"></div>
-    <button class="whatsapp" onclick="finalizarPedido()">Finalizar pedido no WhatsApp</button>
+<div id="carrito">
+  <h3>Carrito</h3>
+  <ul id="lista"></ul>
 </div>
 
-</div>
+<footer>
+© 2026 BRAZ Gráfica
+</footer>
 
 <script>
-const PRECO_M2 = 45;
-const PRECO_MINIMO = 30;
-let carrinho = [];
 
-function atualizarPreco(el) {
-    const produto = el.closest(".produto");
-    const area = parseFloat(produto.querySelector(".tamanho").selectedOptions[0].dataset.area);
-    const qtd = parseInt(produto.querySelector(".quantidade").value);
+const productos = [
+  {nombre:"Etiquetas 5cm", precio:450},
+  {nombre:"Etiquetas 3cm", precio:450},
+  {nombre:"Etiquetas 8cm", precio:450}
+];
 
-    let preco = area * qtd * PRECO_M2;
-    if (preco < PRECO_MINIMO) preco = PRECO_MINIMO;
+let carrito = [];
 
-    produto.querySelector(".preco").innerText =
-        "R$ " + preco.toFixed(2).replace(".", ",");
+function renderProductos(){
+  let html="";
+  productos.forEach((p,i)=>{
+    html+=`
+    <div class="card">
+      <h3>${p.nombre}</h3>
+      <p>$${p.precio}</p>
+      <button onclick="agregar(${i})">Agregar</button>
+    </div>`;
+  });
+  document.getElementById("productos").innerHTML=html;
 }
 
-function adicionarCarrinho(btn, nome) {
-    const produto = btn.closest(".produto");
-    const tamanho = produto.querySelector(".tamanho").value;
-    const qtd = produto.querySelector(".quantidade").value;
-    const preco = produto.querySelector(".preco").innerText;
-
-    carrinho.push({nome, tamanho, qtd, preco});
-    renderCarrinho();
+function agregar(i){
+  carrito.push(productos[i]);
+  renderCarrito();
 }
 
-function removerItem(i) {
-    carrinho.splice(i,1);
-    renderCarrinho();
+function renderCarrito(){
+  let html="";
+  carrito.forEach(p=>{
+    html+=`<li>${p.nombre} - $${p.precio}</li>`;
+  });
+  document.getElementById("lista").innerHTML=html;
 }
 
-function renderCarrinho() {
-    const div = document.getElementById("itens");
-    div.innerHTML = "";
-    carrinho.forEach((item,i)=>{
-        div.innerHTML += `
-        <div class="item-carrinho">
-            <span>${item.nome} - ${item.qtd}</span>
-            <span>${item.preco} <span class="remover" onclick="removerItem(${i})">✖</span></span>
-        </div>`;
-    });
+function enviarPedido(){
+  let texto="Hola, quiero pedir:%0A";
+  carrito.forEach(p=>{
+    texto+=`- ${p.nombre} ($${p.precio})%0A`;
+  });
+
+  window.open(`https://wa.me/5555991140736?text=${texto}`);
 }
 
-function finalizarPedido() {
-    let texto = "Olá! Gostaria de fazer o pedido:%0A";
-    carrinho.forEach(i=>{
-        texto += `${i.nome} (${i.qtd}) - ${i.preco}%0A`;
-    });
-    window.open("https://wa.me/5555999284962?text=" + texto);
+function calcular(){
+  let tam = document.getElementById("tam").value;
+  let cantidad = document.getElementById("cantidad").value;
+
+  let base = {
+    2:2500,
+    3:1089,
+    4:625,
+    5:400,
+    8:144,
+    10:100
+  };
+
+  let packs = Math.ceil(cantidad / base[tam]);
+  let total = packs * 450;
+
+  document.getElementById("resultado").innerHTML =
+    `Necesitas ${packs} packs → Total: $${total}`;
 }
+
+renderProductos();
+
 </script>
 
 </body>
